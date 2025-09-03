@@ -13,7 +13,7 @@ const getCSS = ({ spacing, justify, hyphenate }) => `
     /* https://github.com/whatwg/html/issues/5426 */
     @media (prefers-color-scheme: dark) {
         a:link {
-            color: lightblue;
+            color: darkblue;
         }
     }
     p, li, blockquote, dd {
