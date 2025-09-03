@@ -6,23 +6,30 @@
 <title>E-Book Reader</title>
 <style>
 :root {
-    --active-bg: rgba(0, 0, 0, .05);
+    --bg-color: #bbccaf;
+    --text-color: #444c3c;
+    --active-bg: rgba(68, 76, 60, 0.06);
 }
 @supports (color-scheme: light dark) {
     @media (prefers-color-scheme: dark) {
         :root {
-            --active-bg: rgba(255, 255, 255, .1);
+            /* keep same fixed palette regardless of system scheme */
+            --active-bg: rgba(68, 76, 60, 0.06);
         }
     }
 }
 html {
     height: 100%;
+    background: var(--bg-color);
+    color: var(--text-color);
 }
 body {
     margin: 0 auto;
     height: 100%;
     font: menu;
     font-family: system-ui, sans-serif;
+    background: transparent;
+    color: inherit;
 }
 #drop-target {
     height: 100vh;
@@ -38,6 +45,7 @@ body {
 #file-button {
     font: inherit;
     background: none;
+    color: var(--text-color);
     border: 0;
     padding: 0;
     text-decoration: underline;
@@ -99,8 +107,8 @@ body {
     transform: translateX(-320px);
     display: flex;
     flex-direction: column;
-    background: Canvas;
-    color: CanvasText;
+    background: var(--bg-color);
+    color: var(--text-color);
     box-shadow: 0 0 0 1px rgba(0, 0, 0, .2), 0 0 40px rgba(0, 0, 0, .2);
     transition: visibility 0s linear 300ms, transform 300ms ease;
 }
@@ -170,7 +178,7 @@ body {
     margin: 2px 0;
 }
 #toc-view a {
-    color: CanvasText;
+    color: var(--text-color);
     text-decoration: none;
 }
 #toc-view a:hover {
@@ -183,7 +191,7 @@ body {
     margin-inline-start: -24px;
     padding-inline-start: 5px;
     padding-inline-end: 6px;
-    fill: CanvasText;
+    fill: var(--text-color);
     cursor: default;
     transition: transform .2s ease;
     opacity: .5;
@@ -213,8 +221,8 @@ body {
     visibility: hidden;
     position: absolute;
     right: 0;
-    background: Canvas;
-    color: CanvasText;
+    background: var(--bg-color);
+    color: var(--text-color);
     border-radius: 6px;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, .2), 0 0 16px rgba(0, 0, 0, .1);
     padding: 6px;
@@ -237,17 +245,17 @@ body {
     background-image: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%223%22%2F%3E%3C%2Fsvg%3E');
 }
 .popover {
-    background: Canvas;
-    color: CanvasText;
+    background: var(--bg-color);
+    color: var(--text-color);
     border-radius: 6px;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, .2), 0 0 16px rgba(0, 0, 0, .1), 0 0 32px rgba(0, 0, 0, .1);
 }
 .popover-arrow-down {
-    fill: Canvas;
+    fill: var(--bg-color);
     filter: drop-shadow(0 -1px 0 rgba(0, 0, 0, .2));
 }
 .popover-arrow-up {
-    fill: Canvas;
+    fill: var(--bg-color);
     filter: drop-shadow(0 1px 0 rgba(0, 0, 0, .2));
 }
 </style>
