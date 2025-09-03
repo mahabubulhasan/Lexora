@@ -4,7 +4,12 @@ const ASSETS_TO_CACHE = [
   '/index.html',
   '/reader.html',
   '/reader.js',
-  '/no-cover.png',
+  '/icons/android-launchericon-512-512.png',
+  '/icons/android-launchericon-192-192.png',
+  '/icons/android-launchericon-144-144.png',
+  '/icons/android-launchericon-96-96.png',
+  '/icons/android-launchericon-72-72.png',
+  '/icons/android-launchericon-48-48.png',
   '/manifest.json'
 ];
 
