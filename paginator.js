@@ -390,14 +390,22 @@ class View {
             const side = this.#vertical ? 'width' : 'height'
             const otherSide = this.#vertical ? 'height' : 'width'
             const contentSize = documentElement.getBoundingClientRect()[side]
-            const expandedSize = contentSize === 0 ? 600 : contentSize
+            const expandedSize = contentSize === 0 ? '85vh' : `${contentSize}px`
             const { margin } = this.#layout
             const padding = this.#vertical ? `0 ${margin}px` : `${margin}px 0`
             this.#element.style.padding = padding
-            this.#iframe.style[side] = `${expandedSize}px`
-            this.#element.style[side] = `${expandedSize}px`
+            this.#iframe.style[side] = expandedSize
+            this.#element.style[side] = expandedSize
             this.#iframe.style[otherSide] = '100%'
             this.#element.style[otherSide] = '100%'
+
+            // select the first <div> inside the iframe's document (not the host page)
+            const firstDiv = documentElement?.querySelector('div')
+            if (firstDiv) {
+                setStylesImportant(firstDiv, { width: '770px', background: '#ffffff', padding: '25px' })
+            }
+
+
             if (this.#overlayer) {
                 this.#overlayer.element.style.margin = padding
                 this.#overlayer.element.style.left = '0'
