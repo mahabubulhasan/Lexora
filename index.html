@@ -36,17 +36,24 @@
         color: inherit;
     }
 
-    #drop-target {
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        visibility: hidden;
-    }
+	#drop-target {
+		height: 100vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		visibility: hidden;
+		/* larger copy in the drop area for better readability */
+		font-size: 15px;
+		line-height: 1.2;
+	}
+
+	#drop-target p:first-of-type {
+		font-size: 18px;
+	}
 
     #drop-target h1 {
-        font-weight: 900;
+        font-weight: 600;
     }
 
     #file-button {
@@ -306,6 +313,13 @@
         fill: var(--bg-color);
         filter: drop-shadow(0 1px 0 rgba(0, 0, 0, .2));
     }
+
+	/* small hint shown under the drop-area controls */
+	.drop-hint {
+		margin-top: .5rem;
+		color: GrayText;
+		font-size: 14px;
+	}
 </style>
 <input type="file" id="file-input" hidden>
 <div id="drop-target" class="filter">
@@ -988,7 +1002,8 @@ M621.623657,315.133789
 z" />
         </svg>
         <h1>Drop a book here!</h1>
-        <p>Or <button id="file-button">choose a file</button> to open it.</p>
+	<p>Or <button id="file-button">choose a file</button> to open it.</p>
+	<p class="drop-hint">Supported: EPUB, AZW, MOBI, FB2, CBZ (comic book), PDF</p>
     </div>
 </div>
 <div id="dimming-overlay" aria-hidden="true"></div>
