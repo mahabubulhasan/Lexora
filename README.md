@@ -1,4 +1,9 @@
-# foliate-js
+<!-- filepath: d:\Sandbox\Chrome\Lexora\README.md -->
+# Lexora
+
+Lexora — lightweight, modular e-book renderer for the browser.
+
+Lexora is a polished fork of foliate-js, improved and refined for better readability and runtime performance. It remains a small, dependency-free ES module library for rendering popular e-book formats directly in the browser with streaming-friendly loaders and a clean, modular API.
 
 Library for rendering e-books in the browser.
 
@@ -13,7 +18,7 @@ Features:
 
 ## Demo
 
-The repo includes a demo viewer that can be used to open local files. To use it, serve the files with a server, and navigate to `reader.html`. Or visit the [online demo](https://johnfactotum.github.io/foliate-js/reader.html) hosted on GitHub. Note that it is very incomplete at the moment, and lacks many basic features such as keyboard shortcuts.
+The repo includes a demo viewer that can be used to open local files. To use it, serve the files with a server, and navigate to `reader.html`. Or visit the [online demo](https://lexora.uzzal.com) hosted online. Note that it is very incomplete at the moment, and lacks many basic features such as keyboard shortcuts.
 
 Also note that deobfuscating fonts with the IDPF algorithm requires a SHA-1 function. By default it uses Web Crypto, which is only available in secure contexts. Without HTTPS, you will need to modify `reader.js` and pass your own SHA-1 implementation.
 
@@ -69,7 +74,7 @@ await view.open('example.epub')
 await view.goTo(/* path, section index, or CFI */)
 ```
 
-See the [online demo](https://johnfactotum.github.io/foliate-js/reader.html) for a more advanced example.
+See the [online demo](https://lexora.uzzal.com) for a more advanced example.
 
 ### Security
 
@@ -171,7 +176,7 @@ The filter only applies to the book itself, leaving overlaid elements such as hi
 The paginator uses the same pagination strategy as [Epub.js](https://github.com/futurepress/epub.js): it uses CSS multi-column. As such it shares much of the same limitations (it's slow, some CSS styles do not work as expected, and other bugs). There are a few differences:
 - It is a totally standalone module. You can use it to paginate any content.
 - It is much simpler, but currently there's no support for continuous scrolling.
-- It has no concept of CFIs and operates on `Range` objects directly. 
+- It has no concept of CFIs and operates on `Range` objects directly.
 - It uses bisecting to find the current visible range, which is more accurate than what Epub.js does.
 - It has an internal `#anchor` property, which can be a `Range`, `Element`, or a fraction that represents the current location. The view is *anchored* to it no matter how you resize the window.
 - It supports more than two columns.
@@ -360,7 +365,7 @@ document.querySelector('foliate-quoteimage').getBlob({
 
 ### Supported Browsers
 
-It aims to support the latest version of WebKitGTK, Firefox, and Chromium. Older browsers like Firefox ESR are not supported. 
+It aims to support the latest version of WebKitGTK, Firefox, and Chromium. Older browsers like Firefox ESR are not supported.
 
 Although it's mainly indeded for rendering e-books in the browser, some features can be used in non-browser environments as well. In particular, `epubcfi.js` can be used as is in any environment if you only need to parse or sort CFIs. Most other features depend on having the global objects `Blob`, `TextDecoder`, `TextEncoder`, `DOMParser`, `XMLSerializer`, and `URL`, and should work if you polyfill them.
 
