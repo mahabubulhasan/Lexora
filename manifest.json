@@ -1,0 +1,15 @@
+{
+  "name": "Lexora E-Book Reader",
+  "short_name": "Lexora",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#bbccaf",
+  "theme_color": "#bbccaf",
+  "icons": [
+    {
+      "src": "lexora.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
