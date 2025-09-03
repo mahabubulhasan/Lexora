@@ -356,6 +356,7 @@ class View {
                 'page-break-inside': 'avoid',
                 'break-inside': 'avoid',
                 'box-sizing': 'border-box',
+                'margin': '0 auto'
             })
         }
     }
@@ -390,11 +391,12 @@ class View {
             const side = this.#vertical ? 'width' : 'height'
             const otherSide = this.#vertical ? 'height' : 'width'
             const contentSize = documentElement.getBoundingClientRect()[side]
-            const expandedSize = contentSize === 0 ? '85vh' : `${contentSize}px`
+            const expandedSize = contentSize === 0 ? '65vh' : `${contentSize}px`
             const { margin } = this.#layout
             const padding = this.#vertical ? `0 ${margin}px` : `${margin}px 0`
             // this.#element.style.padding = padding
             this.#iframe.style[side] = expandedSize
+            this.#iframe.style['padding'] = '25px 0'
             this.#element.style[side] = expandedSize
             this.#iframe.style[otherSide] = '100%'
             this.#element.style[otherSide] = '100%'
