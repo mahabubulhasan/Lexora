@@ -393,16 +393,16 @@ class View {
             const expandedSize = contentSize === 0 ? '85vh' : `${contentSize}px`
             const { margin } = this.#layout
             const padding = this.#vertical ? `0 ${margin}px` : `${margin}px 0`
-            this.#element.style.padding = padding
+            // this.#element.style.padding = padding
             this.#iframe.style[side] = expandedSize
             this.#element.style[side] = expandedSize
             this.#iframe.style[otherSide] = '100%'
             this.#element.style[otherSide] = '100%'
 
             // select the first <div> inside the iframe's document (not the host page)
-            const firstDiv = documentElement?.querySelector('div')
-            if (firstDiv) {
-                setStylesImportant(firstDiv, { width: '770px', background: '#ffffff', padding: '25px' })
+            const body = documentElement?.querySelector('body')
+            if (body) {
+                setStylesImportant(body, { 'max-width': '770px', background: '#ffffff', padding: '25px', margin: '48px auto' })
             }
 
 
@@ -627,11 +627,11 @@ export class Paginator extends HTMLElement {
                 requestAnimationFrame(() => this.#scrollToAnchor(e.target)))
         })
 
-        this.#mediaQueryListener = () => {
-            if (!this.#view) return
-            this.#background.style.background = getBackground(this.#view.document)
-        }
-        this.#mediaQuery.addEventListener('change', this.#mediaQueryListener)
+        // this.#mediaQueryListener = () => {
+        //     if (!this.#view) return
+        //     this.#background.style.background = getBackground(this.#view.document)
+        // }
+        // this.#mediaQuery.addEventListener('change', this.#mediaQueryListener)
     }
     attributeChangedCallback(name, _, value) {
         switch (name) {
@@ -690,7 +690,7 @@ export class Paginator extends HTMLElement {
 
         // set background to `doc` background
         // this is needed because the iframe does not fill the whole element
-        this.#background.style.background = background
+        // this.#background.style.background = background
 
         const { width, height } = this.#container.getBoundingClientRect()
         const size = vertical ? height : width
@@ -1117,8 +1117,8 @@ export class Paginator extends HTMLElement {
         } else $style.textContent = styles
 
         // NOTE: needs `requestAnimationFrame` in Chromium
-        requestAnimationFrame(() =>
-            this.#background.style.background = getBackground(this.#view.document))
+        // requestAnimationFrame(() =>
+        //     this.#background.style.background = getBackground(this.#view.document))
 
         // needed because the resize observer doesn't work in Firefox
         this.#view?.document?.fonts?.ready?.then(() => this.#view.expand())
