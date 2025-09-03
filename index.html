@@ -10,6 +10,9 @@
         --bg-color: #bbccaf;
         --text-color: #444c3c;
         --active-bg: rgba(68, 76, 60, 0.06);
+		/* scrollbar colors: track aligned with bg, thumb a bit deeper */
+		--scrollbar-track: rgba(187, 204, 175, 0.92); /* slightly darker/lighter mix of --bg-color */
+		--scrollbar-thumb: rgba(68, 76, 60, 0.18);    /* deeper tone aligned with --text-color */
     }
 
     @supports (color-scheme: light dark) {
@@ -197,7 +200,25 @@
     #toc-view {
         padding: .5rem;
         overflow-y: scroll;
+		/* Firefox */
+		scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+		scrollbar-width: thin;
     }
+
+    /* WebKit browsers */
+    #toc-view::-webkit-scrollbar {
+		width: 12px;
+	}
+	#toc-view::-webkit-scrollbar-track {
+		background: var(--scrollbar-track);
+	}
+	#toc-view::-webkit-scrollbar-thumb {
+		background: var(--scrollbar-thumb);
+		border-radius: 8px;
+		/* give thumb a slight inner gap so it visually sits above the track */
+		border: 3px solid transparent;
+		background-clip: padding-box;
+	}
 
     #toc-view li,
     #toc-view ol {
