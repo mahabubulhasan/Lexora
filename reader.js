@@ -144,8 +144,11 @@ class Reader {
         document.title = title
         $('#side-bar-title').innerText = title
         $('#side-bar-author').innerText = formatContributor(book.metadata?.author)
-        Promise.resolve(book.getCover?.())?.then(blob =>
-            blob ? $('#side-bar-cover').src = URL.createObjectURL(blob) : null)
+
+        let cover = await book.getCover?.()
+        if (cover && typeof cover.type === 'string' && cover.type.startsWith('image/')) {
+            $('#side-bar-cover').src = URL.createObjectURL(cover)
+        }
 
         const toc = book.toc
         if (toc) {
