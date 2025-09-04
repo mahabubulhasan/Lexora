@@ -404,7 +404,7 @@ class View {
             // select the first <div> inside the iframe's document (not the host page)
             const body = documentElement?.querySelector('body')
             if (body) {
-                setStylesImportant(body, { 'max-width': '770px', background: '#ffffff', padding: '25px', margin: '48px auto' })
+                setStylesImportant(body, { 'max-width': '800px', background: '#ffffff', padding: '25px', margin: '48px auto' })
             }
 
 
