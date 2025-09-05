@@ -243,6 +243,9 @@ class View {
         // https://bugs.webkit.org/show_bug.cgi?id=218086
         this.#iframe.setAttribute('sandbox', 'allow-same-origin allow-scripts')
         this.#iframe.setAttribute('scrolling', 'no')
+        // Improve a11y semantics of the content frame
+        this.#iframe.setAttribute('title', 'E-book content')
+        this.#iframe.setAttribute('role', 'document')
     }
     get element() {
         return this.#element
@@ -436,7 +439,8 @@ export class Paginator extends HTMLElement {
         'flow', 'gap', 'margin',
         'max-inline-size', 'max-block-size', 'max-column-count',
     ]
-    #root = this.attachShadow({ mode: 'closed' })
+    // Use an open shadow root to help a11y tooling
+    #root = this.attachShadow({ mode: 'open' })
     #observer = new ResizeObserver(() => this.render())
     #top
     #background
@@ -459,6 +463,8 @@ export class Paginator extends HTMLElement {
     #touchState
     #touchScrolled
     #lastVisibleRange
+    // Light-DOM proxy for Edge Read Aloud (top-level accessible text)
+    #a11yProxy
     constructor() {
         super()
         this.#root.innerHTML = `<style>
@@ -962,6 +968,9 @@ export class Paginator extends HTMLElement {
     #afterScroll(reason) {
         const range = this.#getVisibleRange()
         this.#lastVisibleRange = range
+        // keep proxy text in sync with the visible portion
+        if (this.#a11yProxy) this.#a11yProxy.textContent = range?.toString() || ''
+
         // don't set new anchor if relocation was to scroll to anchor
         if (reason !== 'selection' && reason !== 'navigation' && reason !== 'anchor')
             this.#anchor = range
@@ -1134,6 +1143,9 @@ export class Paginator extends HTMLElement {
         this.#view = null
         this.sections[this.#index]?.unload?.()
         this.#mediaQuery.removeEventListener('change', this.#mediaQueryListener)
+        // Cleanup proxy
+        this.#a11yProxy?.remove()
+        this.#a11yProxy = null
     }
 }
 
